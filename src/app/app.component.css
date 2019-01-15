@@ -40,3 +40,15 @@ body {
     font-size: 8em;
     color: #ED4C67;
 }
+
+particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #2c3a47;
+    z-index: -1;
+}
+
+canvas {
+    display: block;
+}
