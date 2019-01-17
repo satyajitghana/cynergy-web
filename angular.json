@@ -25,7 +25,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["./node_modules/jquery/dist/jquery.min.js",
+            "./src/app/timer.js",
+            "./src/app/TweenMax.min.js"]
           },
           "configurations": {
             "production": {

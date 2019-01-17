@@ -1,148 +1,207 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import particle_config from './particles_config';
+
+declare var TweenMax: any;
+declare var Quart: any;
+declare var $: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'Cynergy';
 
-  myStyle: object = {};
   myParams: object = {};
   width = 100;
   height = 100;
 
-  ngOnInit(): void {
-    // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    // Add 'implements OnInit' to the class.
-    this.myStyle = {
-      'position': 'fixed',
-      'width': '100%',
-      'height': '100%',
-      'z-index': -1,
-      'top': 0,
-      'left': 0,
-      'right': 0,
-      'bottom': 0,
-    };
+  Countdown: any;
 
-    this.myParams = {
-      particles: {
-        number: {
-          'value': 130,
-          'density': {
-            'enable': true,
-            'value_area': 1000
-          }
-        },
-        color: {
-          'value': '#c0392b'
-        },
-        shape: {
-          'type': 'circle',
-          'stroke': {
-            'width': 0,
-            'color': '#000000'
-          },
-          'polygon': {
-            'nb_sides': 5
-          },
-          'image': {
-            'src': 'img/github.svg',
-            'width': 100,
-            'height': 100
-          }
-        },
-        opacity: {
-          'value': 0.5,
-          'random': false,
-          'anim': {
-            'enable': false,
-            'speed': 1,
-            'opacity_min': 0.1,
-            'sync': false
-          }
-        },
-        size: {
-          'value': 3,
-          'random': true,
-          'anim': {
-            'enable': false,
-            'speed': 40,
-            'size_min': 0.1,
-            'sync': false
-          }
-        },
-        line_linked: {
-          'enable': true,
-          'distance': 150,
-          'color': '#ffffff',
-          'opacity': 0.4,
-          'width': 1
-        },
-        move: {
-          'enable': true,
-          'speed': 6,
-          'direction': 'none',
-          'random': false,
-          'straight': false,
-          'out_mode': 'out',
-          'attract': {
-            'enable': false,
-            'rotateX': 600,
-            'rotateY': 1200
-          }
-        }
+  launchDate = new Date(2019, 0, 25, 10, 0, 0, 0);
+
+  ngOnInit(): void {
+    this.myParams = particle_config;
+    this.calculateTimerValues();
+  }
+
+  ngAfterViewInit() {
+    // Let's go !
+    this.Countdown.init();
+  }
+
+  calculateTimerValues(): void {
+    const difference = new Date(this.launchDate.getTime() - (new Date()).getTime());
+    // const hours = difference.getHours();
+    // const minutes = difference.getMinutes();
+    const seconds = difference.getSeconds();
+    const diffMs = this.launchDate.getTime() - (new Date()).getTime(); // milliseconds between now & launch
+    const diffDays = Math.floor(diffMs / 86400000); // days
+    const diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+    const diffMins = Math.floor(((diffMs % 86400000) % 3600000) / 60000); // minutes
+    console.log('days : ' + diffDays, 'hours : ' + diffHrs, 'minutes : ' + diffMins, 'milliseconds : ' + diffMs);
+    this.createTimer(diffDays, diffHrs , diffMins, seconds);
+  }
+
+  createTimer(days_diff, hours_diff, minutes_diff, seconds_diff): void {
+    // Create Countdown
+    this.Countdown = {
+
+      // Backbone-like structure
+      $el: $('.countdown'),
+
+      // Params
+      countdown_interval: null,
+      total_seconds: 0,
+
+      // Initialize the countdown
+      init: function () {
+
+        // DOM
+        this.$ = {
+          days: this.$el.find('.bloc-time.days .figure'),
+          hours: this.$el.find('.bloc-time.hours .figure'),
+          minutes: this.$el.find('.bloc-time.min .figure'),
+          seconds: this.$el.find('.bloc-time.sec .figure')
+        };
+
+        // Init countdown values
+        // this.values = {
+        //   hours: this.$.hours.parent().attr('data-init-value'),
+        //   minutes: this.$.minutes.parent().attr('data-init-value'),
+        //   seconds: this.$.seconds.parent().attr('data-init-value'),
+        // };
+
+        this.values = {
+          days : days_diff,
+          hours: hours_diff,
+          minutes: minutes_diff,
+          seconds: seconds_diff,
+        };
+
+        // Initialize total seconds
+        // tslint:disable-next-line:max-line-length
+        this.total_seconds = this.values.days * 24 * 60 * 60 + this.values.hours * 60 * 60 + (this.values.minutes * 60) + this.values.seconds;
+
+        // Animate countdown to the end
+        this.count();
       },
-      interactivity: {
-        'detect_on': 'canvas',
-        'events': {
-          'onhover': {
-            'enable': true,
-            'mode': 'grab'
-          },
-          onclick: {
-            'enable': true,
-            'mode': 'push'
-          },
-          'resize': true
-        },
-        modes: {
-          'grab': {
-            'distance': 300,
-            'line_linked': {
-              'opacity': 1
+
+      count: function () {
+
+        const that = this,
+          $day_1 = this.$.days.eq(0),
+          $day_2 = this.$.days.eq(1),
+          $hour_1 = this.$.hours.eq(0),
+          $hour_2 = this.$.hours.eq(1),
+          $min_1 = this.$.minutes.eq(0),
+          $min_2 = this.$.minutes.eq(1),
+          $sec_1 = this.$.seconds.eq(0),
+          $sec_2 = this.$.seconds.eq(1);
+
+        this.countdown_interval = setInterval(function () {
+
+          if (that.total_seconds > 0) {
+
+            --that.values.seconds;
+
+            if (that.values.minutes >= 0 && that.values.seconds < 0) {
+
+              that.values.seconds = 59;
+              --that.values.minutes;
             }
-          },
-          bubble: {
-            'distance': 400,
-            'size': 40,
-            'duration': 2,
-            'opacity': 8,
-            'speed': 3
-          },
-          repulse: {
-            'distance': 200
-          },
-          push: {
-            'particles_nb': 4
-          },
-          remove: {
-            'particles_nb': 2
+
+            if (that.values.hours >= 0 && that.values.minutes < 0) {
+
+              that.values.minutes = 59;
+              --that.values.hours;
+            }
+
+            if (that.values.days >= 0 && that.values.hours < 0) {
+              that.values.hours = 24;
+              --that.values.days;
+            }
+
+            // Update DOM values
+            // Days
+            that.checkHour(that.values.days, $day_1, $day_2);
+
+            // Hours
+            that.checkHour(that.values.hours, $hour_1, $hour_2);
+
+            // Minutes
+            that.checkHour(that.values.minutes, $min_1, $min_2);
+
+            // Seconds
+            that.checkHour(that.values.seconds, $sec_1, $sec_2);
+
+            --that.total_seconds;
+          } else {
+            clearInterval(that.countdown_interval);
           }
-        }
+        }, 1000);
       },
-      retina_detect: true,
-      config_demo: {
-        'hide_card': false,
-        'background_color': '#b61924',
-        'background_image': '',
-        'background_position': '50% 50%',
-        'background_repeat': 'no-repeat',
-        'background_size': 'cover'
+
+      animateFigure: function ($el, value) {
+
+        const $top = $el.find('.top'),
+          $bottom = $el.find('.bottom'),
+          $back_top = $el.find('.top-back'),
+          $back_bottom = $el.find('.bottom-back');
+
+        // Before we begin, change the back value
+        $back_top.find('span').html(value);
+
+        // Also change the back bottom value
+        $back_bottom.find('span').html(value);
+
+        // Then animate
+        TweenMax.to($top, 0.8, {
+          rotationX: '-180deg',
+          transformPerspective: 300,
+          ease: Quart.easeOut,
+          onComplete: function () {
+
+            $top.html(value);
+
+            $bottom.html(value);
+
+            TweenMax.set($top, {
+              rotationX: 0
+            });
+          }
+        });
+
+        TweenMax.to($back_top, 0.8, {
+          rotationX: 0,
+          transformPerspective: 300,
+          ease: Quart.easeOut,
+          clearProps: 'all'
+        });
+      },
+
+      checkHour: function (value, $el_1, $el_2) {
+
+        const val_1 = value.toString().charAt(0),
+          val_2 = value.toString().charAt(1),
+          fig_1_value = $el_1.find('.top').html(),
+          fig_2_value = $el_2.find('.top').html();
+
+        if (value >= 10) {
+
+          // Animate only if the figure has changed
+          if (fig_1_value !== val_1) { this.animateFigure($el_1, val_1); }
+          if (fig_2_value !== val_2) { this.animateFigure($el_2, val_2); }
+        } else {
+
+          // If we are under 10, replace first figure with 0
+          if (fig_1_value !== '0') { this.animateFigure($el_1, 0); }
+          if (fig_2_value !== val_1) { this.animateFigure($el_2, val_1); }
+        }
       }
     };
   }
+
 }
