@@ -20,6 +20,10 @@ html {
 body, html {
     height: 100%;
     margin: 0;
+    grid-template-areas:  "nav"
+                          "countdown"
+                          "video";
+    grid-template-rows: 10px 30px auto;
 }
 
 body {
@@ -30,6 +34,46 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c3a47', endColorstr='#929c9a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+
+header {
+  grid-area: nav;
+  margin: 0;
+  background: #212121;
+  display: flex;
+  align-content: center;
+  // display: grid;
+  // grid-template-columns: 50% auto;
+  // grid-template-areas: "figure nav";
+  /*padding: 1.5em;*/
+  // background: rgba(44,58,71, 0.3);
+  font-size: 1.5em;
+  z-index: -2;
+}
+
+header figure {
+  /* padding: 0; */
+  // grid-area: figure;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: center;
+  align-content: center;
+  padding: 0.2em;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  // transform: scale(0.5, 0.5);
+  // -ms-transform: scale(0.5, 0.5);
+  // -webkit-transform: scale(0.5, 0.5);
+  // display: grid;
+  // grid-template-columns: 80px auto;
+}
+
+#logo {
+  height: 50px;
+  width: auto;
 }
 
 /* #title {
@@ -67,12 +111,14 @@ body {
 }
 
 .wrap {
+  grid-area: countdown;
   position: absolute;
   bottom: 0;
   top: 0;
   left: 0;
   right: 0;
-  margin: auto;
+  // margin: auto auto auto auto;
+  margin-top: 80px;
   height: 310px;  
 }
 
@@ -86,7 +132,7 @@ $lato: 'Arvo';
 
 // Title
 h1 {  
-  margin-bottom: 60px;
+  margin-bottom: 20px;
   text-align: center;
   font: 300 2.25em $lato;
   text-transform: uppercase;
@@ -110,12 +156,18 @@ h2 {
 
 // Countdown
 .countdown {
-  width: 1200px;
-  margin: 0 auto;
+  //align-self: center;
+  //position: relative;
+  padding: 0;
+  width: auto;
+  //margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .bloc-time {
     float: left;    
-    margin-right: 45px;    
+    margin-right: 60px;    
     text-align: center;    
 
     &:last-child {
@@ -127,7 +179,7 @@ h2 {
     display: block;
     margin-bottom: 15px;
     font: normal 0.94em $lato;
-    color: #1a1a1a;
+    color: #fff;
     text-transform: uppercase;
   }
 
@@ -152,7 +204,7 @@ h2 {
       margin: auto;
       font: normal 5.94em/107px $lato;
       font-weight: 700;
-      color: #de4848;
+      color: #9d1d59;
     }
 
     .top, .bottom-back {    
@@ -233,4 +285,9 @@ h2 {
       }
     }
   }
+}
+
+iframe {
+  grid-area: video;
+  display: grid;
 }
