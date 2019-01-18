@@ -1,0 +1,305 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* To hide the scrollbar */
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  /* remove scrollbar space */
+  background: transparent;
+  /* optional: just make scrollbar invisible */
+}
+
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #FF0000;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  grid-template-areas: "nav"
+    "countdown"
+    "video";
+  grid-template-rows: 10px 30px auto;
+}
+
+body {
+  background: #2c3a47;
+  /* Old browsers */
+  background: -moz-linear-gradient(45deg, #2c3a47 1%, #929c9a 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, #2c3a47 1%, #929c9a 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, #2c3a47 1%, #929c9a 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2c3a47', endColorstr='#929c9a', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+header {
+  grid-area: nav;
+  margin: 0;
+  background: #212121;
+  display: flex;
+  align-content: center;
+  // display: grid;
+  // grid-template-columns: 50% auto;
+  // grid-template-areas: "figure nav";
+  /*padding: 1.5em;*/
+  // background: rgba(44,58,71, 0.3);
+  font-size: 1.5em;
+  z-index: -2;
+}
+
+header figure {
+  /* padding: 0; */
+  // grid-area: figure;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: center;
+  align-content: center;
+  padding: 0.2em;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  // transform: scale(0.5, 0.5);
+  // -ms-transform: scale(0.5, 0.5);
+  // -webkit-transform: scale(0.5, 0.5);
+  // display: grid;
+  // grid-template-columns: 80px auto;
+}
+
+#logo {
+  height: 50px;
+  width: auto;
+}
+
+/* #title {
+      text-align: center;
+      top: 35%;
+      left: 15%;
+      position: absolute;
+      font-size: 8em;
+      color: #ED4C67;
+  } */
+
+particles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #2c3a47;
+  z-index: -1;
+  margin: 0;
+  padding: 0;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+/* canvas {
+      display: block;
+  } */
+
+/* Count-Down Timer */
+
+@import '~compass-mixins/lib/compass/css3';
+
+// Global
+body {
+  background-color: #f2f1ed;
+}
+
+.wrap {
+  grid-area: countdown;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  // margin: auto auto auto auto;
+  margin-top: 80px;
+  height: 310px;
+}
+
+a {
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+// Variables
+$lato: 'Arvo';
+
+// Title
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  font: 300 2.25em $lato;
+  text-transform: uppercase;
+
+  strong {
+    font-weight: 400;
+    color: #ea4c4c;
+  }
+}
+
+h2 {
+  margin-bottom: 80px;
+  text-align: center;
+  font: 300 0.7em $lato;
+  text-transform: uppercase;
+
+  strong {
+    font-weight: 400;
+  }
+}
+
+// Countdown
+.countdown {
+  //align-self: center;
+  //position: relative;
+  padding: 0;
+  width: auto;
+  //margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .bloc-time {
+    float: left;
+    margin-right: 60px;
+    text-align: center;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .count-title {
+    display: block;
+    margin-bottom: 15px;
+    font: normal 0.94em $lato;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .figure {
+    position: relative;
+    float: left;
+    height: 110px;
+    width: 100px;
+    margin-right: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    @include box-shadow(0 3px 4px 0 rgba(0, 0, 0, .2), inset 2px 4px 0 0 rgba(255, 255, 255, .08));
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    >span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      font: normal 5.94em/107px $lato;
+      font-weight: 700;
+      color: #9d1d59;
+    }
+
+    .top,
+    .bottom-back {
+      &:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+      }
+    }
+
+    .top {
+      z-index: 3;
+      background-color: #f7f7f7;
+      transform-origin: 50% 100%;
+      -webkit-transform-origin: 50% 100%;
+      @include border-top-radius(10px);
+      @include transform(perspective(200px));
+    }
+
+    .bottom {
+      z-index: 1;
+
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background-color: rgba(0, 0, 0, .02);
+      }
+    }
+
+    .bottom-back {
+      z-index: 2;
+      top: 0;
+      height: 50%;
+      overflow: hidden;
+      background-color: #f7f7f7;
+      @include border-top-radius(10px);
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    }
+
+    .top,
+    .top-back {
+      height: 50%;
+      overflow: hidden;
+      @include backface-visibility(hidden);
+    }
+
+    .top-back {
+      z-index: 4;
+      bottom: 0;
+      background-color: #fff;
+      -webkit-transform-origin: 50% 0;
+      transform-origin: 50% 0;
+      @include transform(perspective(200px) rotateX(180deg));
+      @include border-bottom-radius(10px);
+
+      span {
+        position: absolute;
+        top: -100%;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    }
+  }
+}
+
+iframe {
+  grid-area: video;
+  display: grid;
+}

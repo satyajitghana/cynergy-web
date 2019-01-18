@@ -13,7 +13,7 @@ export default {
     shape: {
       'type': 'circle',
       'stroke': {
-        'width': 1,
+        'width': 0,
         'color': '#000000'
       },
       'polygon': {
@@ -113,4 +113,4 @@ export default {
     'background_repeat': 'no-repeat',
     'background_size': 'cover'
   }
-}
+};
