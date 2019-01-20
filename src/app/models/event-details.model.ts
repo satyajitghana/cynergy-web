@@ -1,6 +1,6 @@
 export interface EventDetails {
-    Description: string;
-    Logs: string;
-    Materials: string[];
-    Videos: string[];
+    description: string;
+    logs: string;
+    materials: string[];
+    videos: string[];
 }

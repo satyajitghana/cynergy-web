@@ -26,46 +26,62 @@ export class EventsComponent implements OnInit {
     console.log('List of Events : ');
     this.eventsService.getEventsList().subscribe(data => {
       for (const iterator of data) {
-        console.log(iterator, 'Event Details : ');
-        this.eventsService.getEventWithID(iterator.ID.id).subscribe(console.log);
+        console.log(iterator);
       }
     });
   }
 
   addEvent(): void {
-    const toAddE: EventDetails = {
-      Description: 'Tjhjgghdescription',
-      Logs: 'And thja log',
-      Materials: ['Mathgials ? '],
-      Videos: ['VIgO1']
-    };
-    const toAdd: Event = {
-      EstDuration: 2,
-      EventName: 'YOOOO',
-      EventTopic: 'HEYYY',
-      ID: toAddE,
-      Type: 'DP',
-      isUpcoming: true,
-      timeStamp: <any>firebase.firestore.FieldValue.serverTimestamp()
-    };
 
-    this.eventsService.addEvent(toAdd).then(() => console.log('EventDetails Added')).catch(console.log);
-  }
+    const eventToAdd: Event = this.eventsService.constructEvent(
+      new Date(),
+      'EventName',
+      'EventTopic',
+      'Description',
+      'Logs',
+      ['MAT01'],
+      ['VID01'],
+      30,
+      'TYPE',
+      true
+    );
 
-  addEventDetails(): void {
-    const toAdd: EventDetails = {
-      Description: 'This is a description',
-      Logs: 'And this is a log',
-      Materials: ['Materials ? '],
-      Videos: ['VIDEO1']
-    };
-
-    this.eventsService.addEventDetail(toAdd).then(() => console.log('EventDetails Added')).catch(console.log);
+    this.eventsService.addEvent(eventToAdd)
+      .then(() => console.log('Event Added'))
+      .catch(console.log);
   }
 
   getEventDetails(): void {
     console.log('Event Details');
     this.eventsService.getEventDetails().subscribe(data => {
+      for (const iterator of data) {
+        console.log(iterator);
+      }
+    });
+  }
+
+  addPastEvent(): void {
+    const eventToAdd: Event = this.eventsService.constructEvent(
+      new Date(),
+      'PastEventName',
+      'PastEventTopic',
+      'PastDescription',
+      'PastLogs',
+      ['PastMAT01'],
+      ['PastVID01'],
+      30,
+      'PastTYPE',
+      true
+    );
+
+    this.eventsService.addPastEvent(eventToAdd)
+      .then(() => console.log('Event Added'))
+      .catch(console.log);
+  }
+
+  getPastEvents(): void {
+    console.log('Past List of Events : ');
+    this.eventsService.getPastEvents().subscribe(data => {
       for (const iterator of data) {
         console.log(iterator);
       }

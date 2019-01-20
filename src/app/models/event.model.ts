@@ -2,11 +2,12 @@ import { EventDetails } from './event-details.model';
 import * as firebase from 'firebase';
 
 export interface Event {
-    EstDuration: number;
-    EventName: string;
-    EventTopic: string;
-    ID: EventDetails;
-    Type: string;
+    date: Date;
+    eventName: string;
+    eventTopic: string;
+    details: any; // This will be EventDetails Class
+    duration: number;
+    type: string;
     isUpcoming: boolean;
     timeStamp: firebase.firestore.Timestamp;
 }
