@@ -20,11 +20,15 @@ body {
   // background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 0.9) 50%, rgba(252, 176, 69, 1) 100%);
   // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833ab4", endColorstr="#fcb045", GradientType=1);
 
-  background: rgb(222, 63, 15);
-  background: -moz-linear-gradient(45deg, rgba(222, 63, 15, 0.9) 0%, rgba(157, 29, 89, 0.9) 48%, rgba(58, 29, 100, 0.9) 100%);
-  background: -webkit-linear-gradient(45deg, rgba(222, 63, 15, 0.9) 0%, rgba(157, 29, 89, 0.9) 48%, rgba(58, 29, 100, 0.9) 100%);
-  background: linear-gradient(45deg, rgba(222, 63, 15, 0.9) 0%, rgba(157, 29, 89, 0.9) 48%, rgba(58, 29, 100, 0.9) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#de3f0f", endColorstr="#3a1d64", GradientType=1);
+  // background: rgb(222, 63, 15);
+  // background: -moz-linear-gradient(45deg, rgba(222, 63, 15, 0.9) 0%, rgba(157, 29, 89, 0.9) 48%, rgba(58, 29, 100, 0.9) 100%);
+  // background: -webkit-linear-gradient(45deg, rgba(222, 63, 15, 0.9) 0%, rgba(157, 29, 89, 0.9) 48%, rgba(58, 29, 100, 0.9) 100%);
+  // background: linear-gradient(45deg, rgba(222, 63, 15, 0.9) 0%, rgba(157, 29, 89, 0.9) 48%, rgba(58, 29, 100, 0.9) 100%);
+  // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#de3f0f", endColorstr="#3a1d64", GradientType=1);
+
+  background: #43C6AC;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #191654, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #191654, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 particles {
@@ -70,7 +74,7 @@ canvas {
 // }
 
 // Variables
-$lato: 'Arvo';
+$lato: 'Montserrat';
 
 // // Title
 // h1 {
@@ -140,7 +144,7 @@ header {
   margin: 10px;
   align-self: flex-start;
   margin: 5px 0;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 .main h2 {
@@ -150,6 +154,13 @@ header {
   font-weight: 1000;
   line-height: 1.6;
 
+}
+
+#cynergy {
+  font-family: 'Devil Breeze Medium' !important;
+  font-size: 1.5em;
+  margin: 0;
+  padding: 0;
 }
 
 #inaug-date {
@@ -498,20 +509,21 @@ header {
     max-height: 80px !important;
   }
 
-  .bottom-content {
-    display: none;
+  .bottom-content .bottom-logo {
+    // display: none;
+      max-height: 90px;
   }
 
-  .desktop-bottom {
-    display: fixed !important;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    img {
-      max-height: 60px;
-    }
-  }
+  // .desktop-bottom {
+  //   display: fixed !important;
+  //   margin: 0;
+  //   padding: 0;
+  //   margin-bottom: 10px;
+  //   margin-right: 10px;
+  //   img {
+  //     max-height: 60px;
+  //   }
+  // }
 
   .blinker {
     height: 60px;
@@ -571,6 +583,7 @@ header {
     .figure {
       height: 110px;
       width: 100px;
+      margin-left: 10px !important;
 
       >span {
         font: normal 5.94em/107px $lato;

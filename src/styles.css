@@ -1,11 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Lekton');
 @import url('https://fonts.googleapis.com/css?family=Arvo');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+@font-face {
+    font-family: 'Devil Breeze Medium';
+    src: url('./assets/fonts/DevilBreezeMedium.ttf') format('truetype')
+}
 
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Arvo';
+    font-family: 'Montserrat';
 }
 
 html {
