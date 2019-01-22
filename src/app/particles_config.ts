@@ -1,14 +1,14 @@
 export default {
   particles: {
     number: {
-      'value': 60,
+      'value': 80,
       'density': {
         'enable': true,
         'value_area': 1000
       }
     },
     color: {
-      'value': '#c0392b'
+      'value': '#ffffff'
     },
     shape: {
       'type': 'circle',
@@ -17,7 +17,7 @@ export default {
         'color': '#000000'
       },
       'polygon': {
-        'nb_sides': 2
+        'nb_sides': 5
       }
     },
     opacity: {
@@ -35,7 +35,7 @@ export default {
       'random': true,
       'anim': {
         'enable': true,
-        'speed': 5,
+        'speed': 8,
         'size_min': 0.1,
         'sync': false
       }
@@ -44,12 +44,12 @@ export default {
       'enable': true,
       'distance': 200,
       'color': '#ffffff',
-      'opacity': 0.4,
-      'width': 1
+      'opacity': 0.6,
+      'width': 2
     },
     move: {
       'enable': true,
-      'speed': 2,
+      'speed': 4,
       'direction': 'none',
       'random': false,
       'straight': false,
@@ -73,15 +73,15 @@ export default {
         'mode': 'push'
       },
       'resize': true,
-      onresize: {
-        'enable': true,
-        'density_auto': true,
-        'density_area': 1000
-      }
+      // onresize: {
+      //   'enable': true,
+      //   'density_auto': true,
+      //   'density_area': 1000
+      // }
     },
     modes: {
       'grab': {
-        'distance': 300,
+        'distance': 200,
         'line_linked': {
           'opacity': 1
         }
