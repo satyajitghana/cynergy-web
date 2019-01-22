@@ -26,9 +26,12 @@ body {
   // background: linear-gradient(45deg, rgba(222, 63, 15, 0.9) 0%, rgba(157, 29, 89, 0.9) 48%, rgba(58, 29, 100, 0.9) 100%);
   // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#de3f0f", endColorstr="#3a1d64", GradientType=1);
 
-  background: #43C6AC;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #191654, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #191654, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #43C6AC;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #191654, #43C6AC);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #191654, #43C6AC);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 particles {
@@ -191,13 +194,14 @@ header {
 }
 
 .bottom-content {
-  flex: 1;
+
   display: flex;
   margin: auto;
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 10px;
   margin-left: auto;
+  flex-direction: column;
 }
 
 .bottom-content .bottom-logo {
@@ -206,6 +210,21 @@ header {
   margin-right: 0;
   margin-left: auto;
   margin-top: 20px;
+}
+
+.social-media {
+  z-index: 999;
+  img {
+    max-height: 15px;
+  }
+}
+
+.social-media-link {
+  z-index: 999;
+  color: #ffffff;
+  text-align: center;
+  font-size: 0.9em;
+  text-decoration: none;
 }
 
 .tag-line {
@@ -463,6 +482,20 @@ header {
     max-height: 30px;
   }
 
+  .social-media {
+    z-index: 999;
+    img {
+      max-height: 13px;
+    }
+  }
+  
+  .social-media-link {
+    z-index: 999;
+    color: #ffffff;
+    text-align: center;
+    font-size: 0.7em;
+  }
+
   .countdown {
     .count-title {
       padding: 2px;
@@ -498,7 +531,7 @@ header {
     margin: 0;
     padding: 0;
     flex-direction: row;
-    height: calc(100vh - 90px) !important;
+    height: calc(100vh) !important;
   }
 
   header {
@@ -506,6 +539,19 @@ header {
       height: 60px;
       padding: 10px;
     }
+  }
+
+  .social-media {
+    z-index: 999;
+    img {
+      max-height: 30px;
+    }
+  }
+
+  .social-media-link {
+    z-index: 999;
+    color: #ffffff;
+    text-align: center;
   }
 
   .tag-line {
@@ -517,10 +563,12 @@ header {
     flex: 5;
     margin: auto;
     padding-left: 50px;
+
     h1 {
       font-size: 2.8em;
       line-height: 0.9;
     }
+
     h2 {
       font-size: 1.2em;
     }
@@ -536,7 +584,7 @@ header {
 
   .bottom-content .bottom-logo {
     // display: none;
-      max-height: 80px;
+    max-height: 80px;
   }
 
   // .desktop-bottom {
