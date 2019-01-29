@@ -23,11 +23,23 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
+              "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
+              "node_modules/angular-bootstrap-md/scss/mdb-free.scss"
             ],
-            "scripts": ["./node_modules/jquery/dist/jquery.min.js",
-            "./src/app/timer.js",
-            "./src/app/TweenMax.min.js"]
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/hammerjs/hammer.min.js",
+              "./src/app/native-js/timer.js",
+              "./src/app/native-js/TweenMax.min.js",
+              "./src/app/native-js/jquery.waypoints.min.js",
+              "./src/app/native-js/jquery.stellar.min.js"
+            ]
           },
           "configurations": {
             "production": {
