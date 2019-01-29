@@ -1,0 +1,71 @@
+<main>
+  <!--Section: register-->
+  <section id="register" class="pt-5 wow fadeIn" data-wow-delay="0.1s" style="background-color:rgb(3, 14, 29);">
+    <div class="container py-5">
+
+      <!-- To Display the Alert -->
+        <app-alert></app-alert>
+
+      <form class="text-center needs-validation" [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <p class="h1-responsive font-weight-bold title-color mb-4 text-center mx-auto">Join Us Now !</p>
+
+        <div class="row">
+          <div class="col mb-4 form-group">
+            <input type="name" id="defaultLoginFormEmail" formControlName="name" class="form-control mb-2" placeholder="Name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required>
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col mb-4 form-group">
+            <input type="email" id="defaultLoginFormEmail" formControlName="email" class="form-control mb-2" placeholder="E-mail" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.email.errors.required">Email is Required</div>
+                <div *ngIf="f.email.errors.email">Enter a Valid Email</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col mb-4 form-group">
+            <input type="text" id="defaultLoginFormEmail" formControlName="regno" class="form-control mb-2" placeholder="University Reg. No" [ngClass]="{ 'is-invalid': submitted && f.regno.errors }" required>
+            <div *ngIf="submitted && f.regno.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.regno.errors.required">Reg No is Required</div>
+                <div *ngIf="f.regno.errors.invalidUSN">Enter a valid Reg No.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col text-left">
+            <button class="btn btn-info my-4 mx-auto" type="submit">Join</button>
+          </div>
+        </div>
+
+        <!-- <div class="text-center">
+        <p>Not a member?
+          <a href="">Register</a>
+        </p>
+
+        <p>or sign in with:</p>
+        <a type="button" class="light-blue-text mx-2">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a type="button" class="light-blue-text mx-2">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a type="button" class="light-blue-text mx-2">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a type="button" class="light-blue-text mx-2">
+          <i class="fab fa-github"></i>
+        </a>
+      </div> -->
+      </form>
+    </div>
+  </section>
+
+</main>
