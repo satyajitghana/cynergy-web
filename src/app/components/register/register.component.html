@@ -1,71 +1,98 @@
 <main>
-  <!--Section: register-->
-  <section id="register" class="pt-5 wow fadeIn" data-wow-delay="0.1s" style="background-color:rgb(3, 14, 29);">
-    <div class="container py-5">
+  <section class="py-5" style="background-color:rgb(3, 14, 29);">
+    <div class="container">
+      <!-- Vertical Steppers -->
+      <div class="row my-5">
+        <div class="col-md-12">
 
-      <!-- To Display the Alert -->
-        <app-alert></app-alert>
+          <mat-vertical-stepper [linear]="isLinear" #stepper style="background-color: rgba(11, 43, 56, 0.747); color:white;">
+            
+            <mat-step [stepControl]="basicInfo">
+              <form [formGroup]="basicInfo" class="form-container">
+                <ng-template matStepLabel>Basic Information</ng-template>
+                <mat-form-field>
+                  <input matInput type="name" placeholder="full name" formControlName="name" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput type="email" placeholder="email" formControlName="email" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput type="text" placeholder="username" formControlName="username" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput type="password" placeholder="password" formControlName="password" required>
+                </mat-form-field>
+                <!-- <mat-form-field>
+                    <input matInput type="password" placeholder="re-enter password" formControlName="repassword" required>
+                  </mat-form-field> -->
+                <div>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
 
-      <form class="text-center needs-validation" [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+            <mat-step [stepControl]="specificInfo">
+              <form [formGroup]="specificInfo" class="form-container">
+                <ng-template matStepLabel>Specific Information</ng-template>
+                <mat-form-field>
+                  <mat-select placeholder="Branch" formControlName="branch" required>
+                    <mat-option *ngFor="let branch of branches" [value]="branch">
+                      {{branch}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-select placeholder="Year" formControlName="year" required>
+                    <mat-option *ngFor="let year of years" [value]="year">
+                      {{year}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
 
-        <p class="h1-responsive font-weight-bold title-color mb-4 text-center mx-auto">Join Us Now !</p>
+                <mat-form-field>
+                  <mat-select placeholder="Preferred Programming Language" formControlName="language">
+                    <mat-option *ngFor="let language of languages" [value]="language">
+                      {{language}}
+                      <!--list of languages-->
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput type="text" placeholder="University Registration Number" formControlName="reg_no"
+                    required>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput type="text" placeholder="GitHub username" formControlName="github_username" required>
+                </mat-form-field>
+                <p> <a href="https://github.com/join?source=header-home" target="_blank">Click here</a> to create a
+                  GitHub Account</p>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </form>
 
-        <div class="row">
-          <div class="col mb-4 form-group">
-            <input type="name" id="defaultLoginFormEmail" formControlName="name" class="form-control mb-2" placeholder="Name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required>
-            <div *ngIf="submitted && f.name.errors" class="invalid-feedback text-left">
-                <div *ngIf="f.name.errors.required">Name is required</div>
-            </div>
-          </div>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>One more Click</ng-template>
+              Form Filled !.
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="register()">Register</button>
+              </div>
+            </mat-step>
+          </mat-vertical-stepper>
+
         </div>
 
-        <div class="row">
-          <div class="col mb-4 form-group">
-            <input type="email" id="defaultLoginFormEmail" formControlName="email" class="form-control mb-2" placeholder="E-mail" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-left">
-                <div *ngIf="f.email.errors.required">Email is Required</div>
-                <div *ngIf="f.email.errors.email">Enter a Valid Email</div>
-            </div>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col mb-4 form-group">
-            <input type="text" id="defaultLoginFormEmail" formControlName="regno" class="form-control mb-2" placeholder="University Reg. No" [ngClass]="{ 'is-invalid': submitted && f.regno.errors }" required>
-            <div *ngIf="submitted && f.regno.errors" class="invalid-feedback text-left">
-                <div *ngIf="f.regno.errors.required">Reg No is Required</div>
-                <div *ngIf="f.regno.errors.invalidUSN">Enter a valid Reg No.</div>
-            </div>
-          </div>
-        </div>
+      </div>
 
-        <div class="row">
-          <div class="col text-left">
-            <button class="btn btn-info my-4 mx-auto" type="submit">Join</button>
-          </div>
-        </div>
-
-        <!-- <div class="text-center">
-        <p>Not a member?
-          <a href="">Register</a>
-        </p>
-
-        <p>or sign in with:</p>
-        <a type="button" class="light-blue-text mx-2">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a type="button" class="light-blue-text mx-2">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a type="button" class="light-blue-text mx-2">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a type="button" class="light-blue-text mx-2">
-          <i class="fab fa-github"></i>
-        </a>
-      </div> -->
-      </form>
     </div>
+
+
+
+
   </section>
 
 </main>

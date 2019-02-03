@@ -8,6 +8,5 @@ export interface Event {
     details: any; // This will be EventDetails Class
     duration: number;
     type: string;
-    isUpcoming: boolean;
     timeStamp: firebase.firestore.Timestamp;
 }

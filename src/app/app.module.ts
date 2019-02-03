@@ -30,10 +30,30 @@ import { FaqComponent } from './components/faq/faq.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './components/register/register.component';
+import { GoogleFormComponent } from './components/google-form/google-form.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { LoginComponent } from './components/login/login.component';
 
 // Reactive forms module
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AlertComponent } from './components/alert/alert.component';
+
+
+// Material Design
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatNativeDateModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { DemoMaterialModule } from './material-module';
+
+// Authentication Service
+import { AuthService } from './shared/services/auth.service';
+
+// QRCode Generator
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -48,7 +68,14 @@ import { AlertComponent } from './components/alert/alert.component';
     NavbarComponent,
     FooterComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    GoogleFormComponent,
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -59,9 +86,18 @@ import { AlertComponent } from './components/alert/alert.component';
     AngularFireAuthModule , // import for the authentication feature
     AppRoutingModule, // Routing Module
     MDBBootstrapModule.forRoot(),
-    ReactiveFormsModule // for reactive forms
+    ReactiveFormsModule, // for reactive forms,
+    BrowserAnimationsModule,
+    FormsModule,
+    DemoMaterialModule,
+    HttpClientModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    QRCodeModule // QR Code
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

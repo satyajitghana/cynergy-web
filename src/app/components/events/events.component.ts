@@ -31,19 +31,32 @@ export class EventsComponent implements OnInit {
     });
   }
 
+  /* Example for an Event */
+  // const eventToAdd: Event = this.eventsService.constructEvent(
+  //   new Date(2019, 1, 1, 10, 30, 0, 0),
+  //   'Intro to CP ',
+  //   'EventTopic',
+  //   'Description',
+  //   'Logs', // Log
+  //   ['MAT01'], // Materials
+  //   ['VID01'], // Video Link
+  //   30, // Duration
+  //   'TYPE', // Type
+  //   true
+  // );
+
   addEvent(): void {
 
     const eventToAdd: Event = this.eventsService.constructEvent(
-      new Date(),
-      'EventName',
-      'EventTopic',
-      'Description',
-      'Logs',
-      ['MAT01'],
-      ['VID01'],
-      30,
-      'TYPE',
-      true
+      new Date(2019, 0, 25, 10, 30, 0, 0),
+      'Inauguration',
+      'Inauguration',
+      `Its finally here! the inaugration of the first official coding club of Ramaiah University!`,
+      '',
+      ['Seminar Hall'],
+      [''],
+      120,
+      'Inauguration'
     );
 
     this.eventsService.addEvent(eventToAdd)
@@ -70,8 +83,7 @@ export class EventsComponent implements OnInit {
       ['PastMAT01'],
       ['PastVID01'],
       30,
-      'PastTYPE',
-      true
+      'PastTYPE'
     );
 
     this.eventsService.addPastEvent(eventToAdd)
@@ -86,6 +98,18 @@ export class EventsComponent implements OnInit {
         console.log(iterator);
       }
     });
+  }
+
+  getUpcomingEvent(): void {
+    console.log('Upcoming Event : ');
+    this.eventsService.getNextUpcomingEvent()
+      .then(console.log);
+  }
+
+  getPastTwoEvents(): void {
+    console.log('Past Two Events : ');
+    this.eventsService.getPastTwoEvents()
+      .then(console.log);
   }
 
 }

@@ -1,0 +1,55 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Required for full background image */
+
+html,
+body,
+header,
+#intro-section {
+  height: 100vh !important;
+}
+
+.rgba-gradient {
+  background: -moz-linear-gradient(to top, #19165499, #43c6ac99);
+  background: -webkit-linear-gradient(to top, #19165460, #43c6ac99);
+  background: linear-gradient(to top, #19165499, #43c6ac99);
+}
+
+.view.mask {
+  overflow: auto !important;
+}
+.title-color {
+  color: rgb(222, 63, 15);
+}
+.subtitle-color {
+  color: #fdc830;
+}
+.background-past-event {
+  background: #bdc3c7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2c3e50,
+    #bdc3c7
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.background-upcoming-event {
+  background: linear-gradient(to right, rgba(9, 32, 63, 0.7) 0%, rgba(83, 120, 149, 0.7) 100%);
+}
+.rgba-black-strong {
+  height: inherit;
+}
+.scrollable-list {
+  position: relative;
+  overflow-y: scroll;
+  height: 200px;
+}
+.list-color{
+  background: #2e2e2e;
+  li{
+    background-color: #2e2e2e;
+  }
+}

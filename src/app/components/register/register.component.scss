@@ -1,6 +1,10 @@
-.title-color{
-    color: rgb(222, 63, 15);
+
+
+*{
+    font-family: 'Montserrat', sans-serif;
 }
-.subtitle-color{
-    color: #FDC830;
+/* colors */
+.form-container{
+    display: flex;
+  flex-direction: column;
 }

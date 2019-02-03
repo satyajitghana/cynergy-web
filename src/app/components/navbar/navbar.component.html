@@ -1,4 +1,4 @@
-<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark unique-color-dark scrolling-navbar"
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark unique-color-dark scrolling-navbar" block="true"
   [containerInside]="true">
   <mdb-navbar-brand>
     <a class="logo navbar-brand" href="#">
@@ -8,7 +8,7 @@
   <links>
     <ul class="navbar-nav mr-auto">
       <a class="nav-item nav-link waves-light" href="" [routerLink]="['/']"   routerLinkActive="active" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link waves-light" href="" [routerLink]="['/register']"   routerLinkActive="active" mdbWavesEffect>Join Now !</a>
+      <!-- <a class="nav-item nav-link waves-light" href="" [routerLink]="['/join314159265']" routerLinkActive="active" mdbWavesEffect>Join Now !</a> -->
       <a class="nav-item nav-link waves-light" href="" [routerLink]="['/about']" routerLinkActive="active" mdbWavesEffect>About</a>
       <a class="nav-item nav-link waves-ligh disabled" href="" [routerLink]="['/events']" routerLinkActive="active" mdbWavesEffect>Event</a>
       <a class="nav-item nav-link waves-light" href="" [routerLink]="['/faq']" routerLinkActive="active" mdbWavesEffect>FAQ</a>
@@ -17,7 +17,7 @@
     </ul>
     <!-- Social Icon  -->
     <ul class="navbar-nav nav-flex-icons">
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="https://facebook.com/cynerg.ruas">
           <i class="fab fa-facebook-f light-green-text-2"></i>
         </a>
@@ -31,7 +31,16 @@
         <a class="nav-link" href="https://github.com/cynergy-ruas">
           <i class="fab fa-github light-green-text-2"></i>
         </a>
+      </li> -->
+      <li class="nav-item" *ngIf="!authService.userData">
+        <a class="nav-item nav-link waves-light" href="" [routerLink]="['/register']" routerLinkActive="active" mdbWavesEffect >Register</a>
       </li>
+      <li class="nav-item" style="background-color: rgba(222, 63, 15, 0.7)" *ngIf="!authService.userData">
+        <a class="nav-item nav-link waves-light" href="" [routerLink]="['/login']" routerLinkActive="active" mdbWavesEffect >Login</a>
+      </li>
+      <li class="nav-item" style="background-color: rgba(222, 63, 15, 0.7)" *ngIf="authService.userData">
+          <a class="nav-item nav-link waves-light" href="" (click)="authService.signOut()"  routerLinkActive="active" mdbWavesEffect >Log Out</a>
+        </li>
     </ul>
   </links>
 </mdb-navbar>

@@ -50,7 +50,6 @@ export class EventsService {
     videos: string[],
     duration: number,
     type: string,
-    isUpcoming: boolean
     ): Event {
 
       const newEventDetails: EventDetails = {
@@ -67,7 +66,6 @@ export class EventsService {
         details: newEventDetails,
         duration: duration,
         type: type,
-        isUpcoming: isUpcoming,
         timeStamp: <any>firebase.firestore.FieldValue.serverTimestamp()
       };
 
@@ -111,6 +109,33 @@ export class EventsService {
   // Returns the list of PastEvents
   getPastEvents() {
     return this.peref.valueChanges();
+  }
+
+  // Gets the next Upcoming Event
+  getNextUpcomingEvent() {
+    const query = this.elref.ref.where('date', '>=', new Date()).orderBy('date').limit(1);
+    const result = query.get()
+    .then(querySnapshot => {
+      return querySnapshot.docs.map(documentSnapshot => documentSnapshot.data());
+    })
+    .then(documents => {
+      return documents[0];
+    })
+    .catch(console.log);
+
+    return result;
+  }
+
+  // Gets the PAST two events
+  getPastTwoEvents() {
+    const query = this.elref.ref.where('date', '<', new Date()).orderBy('date', 'desc').limit(2);
+    const result =  query.get()
+      .then(querySnapshot => {
+        return querySnapshot.docs.map(documentSnapshot => documentSnapshot.data());
+      })
+      .catch(console.log);
+
+    return result;
   }
 
   /* Add Methods */

@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-
-// Registration Service
-import { RegisterService } from '../../services/register.service';
-import { AlertService } from 'src/app/services/alert.service';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -12,63 +11,68 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  isLinear = true;
 
-  registrationForm: FormGroup;
-  submitted = false;
+  basicInfo: FormGroup;
+  specificInfo: FormGroup;
+
+  branches = ['CSE', 'ECE', 'EEE', 'ME', 'ASE', 'CE', 'AME'];
+  years = ['2018', '2017', '2016', '2015', '2014'];
+  languages = ['C', 'C++', 'Python', 'Java', 'Haskell', 'JavaScript', 'TypeScript', 'Dart', 'R', 'PyPy'];
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: RegisterService,
-    private alertService: AlertService,
-    private router: Router
+    private authService: AuthService,
+    private router: Router,
+    private alertService: AlertService
     ) {
-    this.registrationForm = this.createForm();
-  }
+
+      this.basicInfo = this.formBuilder.group({
+        name: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
+        username: ['', [Validators.required, Validators.pattern('^[a-z0-9_.-]{8,}$')]],
+        password: ['', [Validators.required, Validators.minLength(8)]]
+      });
+
+      this.specificInfo = this.formBuilder.group({
+        branch: ['', Validators.required],
+        year: ['', Validators.required],
+        language: ['', Validators.required],
+        reg_no: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]],
+        github_username: ['', Validators.required]
+      });
+
+    }
 
   ngOnInit() {
+
   }
 
-  createForm() {
-    return this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      regno: ['', [Validators.required, this.USNValidator]]
+  register() {
+    // console.log(this.basicInfo.value);
+    // console.log(this.specificInfo.value);
+    const user: User = new User();
+    user.email = this.basicInfo.value.email.toLowerCase();
+    user.name = this.basicInfo.value.name;
+    user.username = this.basicInfo.value.username;
+    user.branch = this.specificInfo.value.branch;
+    user.year = this.specificInfo.value.year;
+    user.language = this.specificInfo.value.language;
+    user.reg_no = this.specificInfo.value.reg_no.toUpperCase();
+    user.github_username = this.specificInfo.value.github_username;
+    this.authService.signUpWithEmailAndPassword(user.email, this.basicInfo.value.password);
+    this.authService.saveRegistrationInfo(user)
+    .then( () => {
+      this.alertService.success('Registered Successfully');
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        this.router.navigate(['/dashboard']);
+      }, 2000);
+    }
+    )
+    .catch(err => {
+      this.alertService.error('Error : ' + err);
     });
   }
-
-  onSubmit() {
-    this.submitted = true;
-
-    if (this.registrationForm.invalid) {
-      this.alertService.error('Fill in all the Details Correctly');
-      return;
-  }
-    const result = Object.assign({}, this.registrationForm.value);
-    console.log(result);
-    this.registerService.registerUser(result)
-      .then( () => {
-        this.alertService.success('Registered Successfully');
-        // Redirect after 2 seconds
-        setTimeout(() => {
-          this.router.navigate(['./']);
-        }, 2000);
-      }
-      )
-      .catch(err => {
-        this.alertService.error('Error : ' + err);
-      });
-  }
-
-  get f() {
-    return this.registrationForm.controls;
-  }
-
-  // Validator
-  USNValidator (control: AbstractControl): { [key: string]: boolean } | null {
-    if (control.value !== undefined && (control.value.length !== 12 )) {
-        return { 'invalidUSN': true };
-    }
-    return null;
-}
 
 }

@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyDF0FTuStdZlDFwWIuKFmZWGl9vjEqR8uk',
-    authDomain: 'cynergyweb-2ae8c.firebaseapp.com',
-    databaseURL: 'https://cynergyweb-2ae8c.firebaseio.com',
-    projectId: 'cynergyweb-2ae8c',
-    storageBucket: 'cynergyweb-2ae8c.appspot.com',
-    messagingSenderId: '1089845147125'
+    apiKey: 'AIzaSyBfMzMmWFY7gjzflod0cTyeuwPK4Z2q1ik',
+    authDomain: 'cynergy-ruas.firebaseapp.com',
+    databaseURL: 'https://cynergy-ruas.firebaseio.com',
+    projectId: 'cynergy-ruas',
+    storageBucket: '',
+    messagingSenderId: '319069936084'
   }
 };
 

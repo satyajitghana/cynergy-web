@@ -1,0 +1,83 @@
+<!-- Section SignIn -->
+
+<main>
+  <section class="sign-up-section text-center pt-5 full-bg-img" style="background-color:rgb(3, 14, 29);">
+    <div class="container py-5">
+
+      <h1 class="h1-responsive font-weight-bold title-color mb-4 text-center mx-auto">Login</h1>
+
+      <div class="row">
+        <div class="col mb-4">
+          <div class="formGroup">
+            <input type="text" class="formControl" placeholder="Username" #userName required>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col mb-4">
+          <div class="formGroup">
+            <input type="password" class="formControl" placeholder="Password" #userPassword required>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col mb-4">
+          <div class="formGroup">
+            <input type="button" mdbBtn color="primary" class="btn primary" value="Log in" (click)="authService.signInWithEmailAndPassword(userName.value, userPassword.value)"
+              mdbWavesEffect>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col mb-4">
+          <div class="formGroup white-text">
+            <span class="or"><span class="orInner">Or</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center mb-4">
+          <div class="col col-md-auto">
+            <!-- Continue with Google -->
+            <div class="formGroup">
+              <button type="button" mdbBtn class="btn google-plus red" (click)="authService.googleAuth()" mdbWavesEffect>
+                <i class="fab fa-google-plus-g"></i>
+                Google
+              </button>
+            </div>
+          </div>
+          <div class="col col-md-auto">
+              <!-- Continue with Github -->
+              <div class="formGroup">
+                <button type="button" mdbBtn class="btn github" color="elegant" (click)="authService.githubAuth()" mdbWavesEffect>
+                  <i class="fab fa-github"></i>
+                  GitHub
+                </button>
+              </div>
+            </div>
+        </div>
+
+      <div class="row">
+        <div class="col mb-4">
+
+          <div class="forgotPassword white-text">
+            <span routerLink="/forgot-password">Forgot Password?</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col mb-4">
+
+          <div class="redirectToLogin white-text">
+            <span>Don't have an account?<span class="redirect" routerLink="/register-user"> Sign Up</span></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>

@@ -1,0 +1,150 @@
+<main>
+  <section class="pt-5 full-bg-img" style="background-color:rgb(3, 14, 29);">
+    <div class="container-fluid py-5">
+
+      <!-- Grid row -->
+      <div class="row my-3" *ngIf="currentUser as user">
+
+        <!-- Grid column -->
+        <div class="col-lg-2 col-md-4 block-example border-right border-dark text-center">
+          <div class="avatar my-2">
+            <img src="../../assets/default-avatar.jpg" height="150px;" class="rounded-circle z-depth-1" alt="Sample avatar">
+          </div>
+          <h5 class="font-weight-bold subtitle-color mb-0">{{user.name}}</h5>
+          <p class="blue-text">@{{user.username}}</p>
+          <p class="text-uppercase blue-text">
+            <strong>Ninja</strong>
+          </p>
+          <p class="blue-text">
+            Ranking:
+            <strong>1450</strong>
+          </p>
+          <p class="button red white-text">
+            <a class="nav-link" (click)="authService.signOut()">
+              <i class="fas fa-sign-out-alt"></i>Log out
+            </a>
+          </p>
+          <p class="grey-text">Bio.</p>
+
+          <p class="blue-text" *ngIf="user.facebook" >
+            <i class="fab fa-facebook-f"> </i>:
+            <a><strong>@fbhandle</strong></a>
+          </p>
+          <p class="blue-text" *ngIf="user.github_username" >
+            <i class="fab fa-github"> </i>:
+            <a><strong>@{{user.github_username}}</strong></a>
+          </p>
+          <p class="blue-text" *ngIf="user.twitter" >
+            <i class="fab fa-twitter"> </i>:
+            <a><strong>Add handle</strong></a>
+          </p>
+          <p class="blue-text" *ngIf="user.instagram">
+            <i class="fab fa-instagram"> </i>:
+            <a><strong>Add handle</strong></a>
+          </p>
+        </div>
+        <!-- Grid column -->
+        <div class="col-lg-9 col-md-4">
+          <div class="row text-center">
+            <div class="col-lg-12 col-md-12 mb-4">
+              <div class="card card-image background-upcoming-event">
+                <div class="text-white text-center d-flex align-items-center rgba-black-light py-2 px-4 rounded">
+                  <div>
+
+                    <h4 class="py-3 font-weight-bold">
+                      Hey! {{user.name}}, We hope you are having a great day.
+                    </h4>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <blockquote class="blockquote bq-primary">
+                <p class="bq-title">Attendance</p>
+                <p class="text-white">0 out of 4 sessions<br>
+                  0 out of 4 workshops
+                </p>
+              </blockquote>
+            </div>
+            <div class="col-lg-6">
+              <blockquote class="blockquote bq-primary">
+                <p class="bq-title">Points</p>
+                <p class="text-white">5 points from attending sessions<br>
+                  10 points from coding
+                </p>
+              </blockquote>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-12 my-2">
+              <mdb-card class="text-white h-100" bgColor="bg-dark">
+                <mdb-card-body>
+                  <mdb-card-title>
+                    <h5 class="font-weight-bold mb-3">Recent Activities</h5>
+                  </mdb-card-title>
+                  <mdb-card-text class="mb-0">Your Recent Activites</mdb-card-text>
+                </mdb-card-body>
+                <ul class="list-group list-group-flush scrollable-list list-color">
+                  <!-- <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                  <li class="list-group-item">Vestibulum at eros</li>
+                  <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                  <li class="list-group-item">Vestibulum at eros</li>
+                  <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                  <li class="list-group-item">Vestibulum at eros</li>
+                  <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                  <li class="list-group-item">Vestibulum at eros</li> -->
+                </ul>
+
+              </mdb-card>
+
+            </div>
+            <div class="col-lg-4 col-md-12 text-center my-2">
+              <mdb-card class="text-white" style="width: auto;" bgColor="bg-dark">
+                <mdb-card-body>
+                  <mdb-card-title>
+                    <h5 class="font-weight-bold mb-3">Event QR</h5>
+                  </mdb-card-title>
+                  <mdb-card-text class="mb-0 pb-0">Your key to the event</mdb-card-text>
+                </mdb-card-body>
+                <!-- <mdb-card-img src="../../assets/QR.png" class="img-fluid rounded mx-auto d-block" alt="QR Code"></mdb-card-img> -->
+                <qrcode [qrdata]="usernameQR" [size]="256" [level]="'M'"></qrcode>
+              </mdb-card>
+            </div>
+            <div class="col-lg-4 col-md-12 text-center my-2">
+              <mdb-card class="text-white h-100" style="width: auto;" bgColor="bg-dark">
+                <mdb-card-body>
+                  <mdb-card-title>
+                    <h5 class="font-weight-bold mb-3">Leaderboard Stats</h5>
+                  </mdb-card-title>
+                  <mdb-card-text class="mb-0 pb-0">Your key to the success</mdb-card-text>
+                  <div class="flex-row">
+                    <a class="card-link">Mrow</a>
+                    <a class="card-link">Meow Meow</a>
+                  </div>
+                </mdb-card-body>
+
+
+
+              </mdb-card>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+
+
+  </section>
+
+</main>

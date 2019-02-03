@@ -22,7 +22,7 @@ export class CountdownComponent implements OnInit, AfterViewInit {
   Countdown: any;
 
   // for some damn reason January is the 0th month
-  launchDate = new Date(2019, 0, 25, 10, 10, 0, 0);
+  launchDate = new Date(2019, 0, 30, 17, 0, 0, 0);
 
   constructor() { }
 
