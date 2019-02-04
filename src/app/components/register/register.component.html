@@ -6,22 +6,45 @@
         <div class="col-md-12">
 
           <mat-vertical-stepper [linear]="isLinear" #stepper style="background-color: rgba(11, 43, 56, 0.747); color:white;">
-            
+
             <mat-step [stepControl]="basicInfo">
               <form [formGroup]="basicInfo" class="form-container">
                 <ng-template matStepLabel>Basic Information</ng-template>
                 <mat-form-field>
                   <input matInput type="name" placeholder="full name" formControlName="name" required>
+                  <div *ngIf="f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">Name is required</div>
+                  </div>
                 </mat-form-field>
+                <div *ngIf="f.name.errors" class="red">
+                  <div *ngIf="f.name.errors.required">
+                    Name is Required
+                  </div>
+                </div>
                 <mat-form-field>
                   <input matInput type="email" placeholder="email" formControlName="email" required>
                 </mat-form-field>
+                <div *ngIf="f.email.errors" class="red">
+                  <div *ngIf="f.email.errors.email">
+                    Enter a valid mail
+                  </div>
+                </div>
                 <mat-form-field>
                   <input matInput type="text" placeholder="username" formControlName="username" required>
                 </mat-form-field>
+                <div *ngIf="f.username.errors" class="red">
+                  <div *ngIf="f.username.errors.pattern">
+                    username can contain alpha-numeric and -. with minimum length 4
+                  </div>
+                </div>
                 <mat-form-field>
                   <input matInput type="password" placeholder="password" formControlName="password" required>
                 </mat-form-field>
+                <div *ngIf="f.password.errors" class="red">
+                  <div *ngIf="f.password.errors.minlength">
+                    password has to be minimum length 8
+                  </div>
+                </div>
                 <!-- <mat-form-field>
                     <input matInput type="password" placeholder="re-enter password" formControlName="repassword" required>
                   </mat-form-field> -->
@@ -58,9 +81,14 @@
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field>
-                  <input matInput type="text" placeholder="University Registration Number" formControlName="reg_no"
+                  <input matInput type="text" placeholder="University Registration Number like 17ETCS002159" formControlName="reg_no"
                     required>
                 </mat-form-field>
+                <div *ngIf="f2.reg_no.errors" class="red">
+                    <div *ngIf="f2.reg_no.errors.minlength">
+                      Enter a Proper Reg No
+                    </div>
+                  </div>
                 <mat-form-field>
                   <input matInput type="text" placeholder="GitHub username" formControlName="github_username" required>
                 </mat-form-field>

@@ -32,6 +32,9 @@
           <i class="fab fa-github light-green-text-2"></i>
         </a>
       </li> -->
+      <li class="nav-item" *ngIf="authService.userData">
+        <a class="nav-item nav-link waves-light" href="" [routerLink]="['/dashboard']" routerLinkActive="active" mdbWavesEffect >Dashboard</a>
+      </li>
       <li class="nav-item" *ngIf="!authService.userData">
         <a class="nav-item nav-link waves-light" href="" [routerLink]="['/register']" routerLinkActive="active" mdbWavesEffect >Register</a>
       </li>

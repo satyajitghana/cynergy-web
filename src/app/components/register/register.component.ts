@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
       this.basicInfo = this.formBuilder.group({
         name: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
-        username: ['', [Validators.required, Validators.pattern('^[a-z0-9_.-]{8,}$')]],
+        username: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.-]{4,}$')]],
         password: ['', [Validators.required, Validators.minLength(8)]]
       });
 
@@ -46,6 +46,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  get f() {
+    return this.basicInfo.controls;
+  }
+
+  get f2() {
+    return this.specificInfo.controls;
   }
 
   register() {
