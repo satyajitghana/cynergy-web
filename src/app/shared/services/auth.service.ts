@@ -36,7 +36,8 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
         });
-        this.setUserData(result.user);
+        // this.setUserData(result.user);
+        this.userData =  this.getCurrentUser(email);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -130,16 +131,22 @@ export class AuthService {
   }
 
   getCurrentUser(email) {
-    const userRef: AngularFirestoreCollection = this.afs.collection(`Users`);
-    const query = userRef.ref.where('email', '==', email).limit(1);
+    // const userRef: AngularFirestoreCollection = this.afs.collection(`Users`);
+    // const query = userRef.ref.where('email', '==', email).limit(1);
 
-    const result =  query.get()
-    .then(querySnapshot => {
-      return querySnapshot.docs.map(documentSnapshot => documentSnapshot.data());
-    })
-    .catch(console.log);
+    // const result =  query.get()
+    // .then(querySnapshot => {
+    //   return querySnapshot.docs.map(documentSnapshot => documentSnapshot.data());
+    // })
+    // .catch(console.log);
+    const userRef = this.afs.collection(`Users`).doc(email);
+    const userDoc = userRef.ref.get()
+      .then(document => {
+        return document.data();
+      })
+      .catch(console.log);
 
-    return result;
+    return userDoc;
   }
 
   signOut() {

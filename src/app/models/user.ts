@@ -7,6 +7,8 @@ export class User {
     language: string;
     reg_no: string;
     github_username: string;
+    competitive_track: boolean;
+    development_track: boolean;
 
     constructor() { }
 }

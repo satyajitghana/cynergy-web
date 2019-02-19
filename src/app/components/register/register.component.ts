@@ -39,7 +39,9 @@ export class RegisterComponent implements OnInit {
         year: ['', Validators.required],
         language: ['', Validators.required],
         reg_no: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]],
-        github_username: ['', Validators.required]
+        github_username: ['', Validators.required],
+        competitive_track: [false],
+        development_track: [false]
       });
 
     }
@@ -68,6 +70,9 @@ export class RegisterComponent implements OnInit {
     user.language = this.specificInfo.value.language;
     user.reg_no = this.specificInfo.value.reg_no.toUpperCase();
     user.github_username = this.specificInfo.value.github_username;
+    user.competitive_track = this.specificInfo.value.competitive_track;
+    user.development_track = this.specificInfo.value.development_track;
+    console.log(user);
     this.authService.signUpWithEmailAndPassword(user.email, this.basicInfo.value.password);
     this.authService.saveRegistrationInfo(user)
     .then( () => {

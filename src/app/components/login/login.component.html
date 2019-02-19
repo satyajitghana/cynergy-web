@@ -130,10 +130,10 @@
           <button class="login-button" type="submit" id="login" (click)="authService.signInWithEmailAndPassword(email.value, password.value)" mdbWavesEffect >Log in</button>
         </div>
         <div>
-          <button type="button" mdbBtn class="btn-gplus waves-light red" (click)="authService.googleAuth()" mdbWavesEffect>
+          <!-- <button type="button" mdbBtn class="btn-gplus waves-light red" (click)="authService.googleAuth()" mdbWavesEffect>
             <i class="fab fa-google-plus left"></i>
             Google+
-          </button>
+          </button> -->
           <button type="button" mdbBtn class="btn-git waves-light" color="elegant" (click)="authService.githubAuth()" mdbWavesEffect>
             <i class="fab fa-github left"></i>
             Github

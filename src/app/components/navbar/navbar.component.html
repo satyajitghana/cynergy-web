@@ -7,13 +7,17 @@
   </mdb-navbar-brand>
   <links>
     <ul class="navbar-nav mr-auto">
-      <a class="nav-item nav-link waves-light" href="" [routerLink]="['/']"   routerLinkActive="active" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link waves-light" href="" [routerLink]="['/']" routerLinkActive="active" mdbWavesEffect>Home<span
+          class="sr-only">(current)</span></a>
       <!-- <a class="nav-item nav-link waves-light" href="" [routerLink]="['/join314159265']" routerLinkActive="active" mdbWavesEffect>Join Now !</a> -->
-      <a class="nav-item nav-link waves-light" href="" [routerLink]="['/about']" routerLinkActive="active" mdbWavesEffect>About</a>
-      <a class="nav-item nav-link waves-ligh disabled" href="" [routerLink]="['/events']" routerLinkActive="active" mdbWavesEffect>Event</a>
+      <a class="nav-item nav-link waves-light" href="" [routerLink]="['/about']" routerLinkActive="active"
+        mdbWavesEffect>About</a>
+      <a class="nav-item nav-link waves-ligh disabled" href="" [routerLink]="['/events']" routerLinkActive="active"
+        mdbWavesEffect>Event</a>
       <a class="nav-item nav-link waves-light" href="" [routerLink]="['/faq']" routerLinkActive="active" mdbWavesEffect>FAQ</a>
-      <a class="nav-item nav-link waves-light" href="" [routerLink]="['/team']" routerLinkActive="active" >Team</a>
-      <a class="nav-item nav-link waves-light" href="" [routerLink]="['/hall-of-fame']" routerLinkActive="active" >Hall of Fame</a>
+      <a class="nav-item nav-link waves-light" href="" [routerLink]="['/team']" routerLinkActive="active">Team</a>
+      <a class="nav-item nav-link waves-light" href="" [routerLink]="['/hall-of-fame']" routerLinkActive="active">Hall
+        of Fame</a>
     </ul>
     <!-- Social Icon  -->
     <ul class="navbar-nav nav-flex-icons">
@@ -32,18 +36,38 @@
           <i class="fab fa-github light-green-text-2"></i>
         </a>
       </li> -->
-      <li class="nav-item" *ngIf="authService.userData">
+      <!-- <li class="nav-item" style="background-color: rgba(39, 174, 96, 0.7)" *ngIf="authService.userData">
         <a class="nav-item nav-link waves-light" href="" [routerLink]="['/dashboard']" routerLinkActive="active" mdbWavesEffect >Dashboard</a>
+      </li> -->
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" *ngIf="currentUser as user" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" style="background-color: #d35400"
+          mdbWavesEffect>
+          Hello {{user.name}}<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#" [routerLink]="['/dashboard']">Dashboard</a>
+          <a *ngIf="user.role == 'coordinator'" class="dropdown-item waves-light" mdbWavesEffect href="#" [routerLink]="['/attendance-scanner']">Attendance
+            Scanner</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#" (click)="authService.signOut()">Log out</a>
+          <!-- <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a> -->
+          <!-- <div class="divider dropdown-divider"></div> -->
+          <!-- <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a> -->
+        </div>
       </li>
+
       <li class="nav-item" *ngIf="!authService.userData">
-        <a class="nav-item nav-link waves-light" href="" [routerLink]="['/register']" routerLinkActive="active" mdbWavesEffect >Register</a>
+        <a class="nav-item nav-link waves-light" href="" [routerLink]="['/register']" routerLinkActive="active"
+          mdbWavesEffect>Register</a>
       </li>
       <li class="nav-item" style="background-color: rgba(222, 63, 15, 0.7)" *ngIf="!authService.userData">
-        <a class="nav-item nav-link waves-light" href="" [routerLink]="['/login']" routerLinkActive="active" mdbWavesEffect >Login</a>
+        <a class="nav-item nav-link waves-light" href="" [routerLink]="['/login']" routerLinkActive="active"
+          mdbWavesEffect>Login</a>
       </li>
-      <li class="nav-item" style="background-color: rgba(222, 63, 15, 0.7)" *ngIf="authService.userData">
-          <a class="nav-item nav-link waves-light" href="" (click)="authService.signOut()"  routerLinkActive="active" mdbWavesEffect >Log Out</a>
-        </li>
+      <!-- <li class="nav-item" style="background-color: rgba(222, 63, 15, 0.7)" *ngIf="authService.userData">
+        <a class="nav-item nav-link waves-light" href="" (click)="authService.signOut()" routerLinkActive="active"
+          mdbWavesEffect>Log Out</a>
+      </li> -->
     </ul>
   </links>
 </mdb-navbar>

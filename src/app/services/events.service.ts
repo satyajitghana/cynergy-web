@@ -126,6 +126,24 @@ export class EventsService {
     return result;
   }
 
+  // to fetch the id of the upcoming event
+  getNextUpcomingEventId() {
+    const query = this.elref.ref.where('date', '>=', new Date()).orderBy('date').limit(1);
+    const result = query.get()
+    .then(querySnapshot => {
+      // console.log(querySnapshot.docs);
+      // return querySnapshot.docs.map(documentSnapshot => documentSnapshot.data());
+      return querySnapshot.docs[0].id;
+    })
+    // .then(documents => {
+    //   console.log(documents);
+    //   return documents[0];
+    // })
+    .catch(console.log);
+
+    return result;
+  }
+
   // Gets the PAST two events
   getPastTwoEvents() {
     const query = this.elref.ref.where('date', '<', new Date()).orderBy('date', 'desc').limit(2);
@@ -169,5 +187,17 @@ export class EventsService {
     .catch(err => {
       console.log('Error Adding Event:', err);
     });
+  }
+
+  updateUserEvent(email: string, eventid: string) {
+    return this.dbref.collection('Users').doc(email).collection('events_attended').doc(eventid).set({attended: true})
+      .then(() => {
+        console.log('Added Successfully');
+        return 'Added Successfully';
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
   }
 }

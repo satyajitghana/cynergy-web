@@ -55,6 +55,10 @@ import { AuthService } from './shared/services/auth.service';
 // QRCode Generator
 import { QRCodeModule } from 'angularx-qrcode';
 
+// QRCode Scanner
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { AttendanceScannerComponent } from './components/attendance-scanner/attendance-scanner.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +79,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    LoginComponent
+    LoginComponent,
+    AttendanceScannerComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +98,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     HttpClientModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    QRCodeModule // QR Code
+    QRCodeModule, // QR Generator Code
+    ZXingScannerModule // QR Scanner
   ],
   providers: [
     AuthService

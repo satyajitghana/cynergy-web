@@ -8,6 +8,9 @@ import { EventDetails } from '../../models/event-details.model';
 import { Event } from '../../models/event.model';
 
 import * as firebase from 'firebase';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { FirebaseAuth } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-events',
@@ -16,7 +19,10 @@ import * as firebase from 'firebase';
 })
 export class EventsComponent implements OnInit {
 
-  constructor(private eventsService: EventsService) {
+  constructor(
+    private eventsService: EventsService,
+    private authSerice: AuthService,
+    private afAuth: AngularFireAuth) {
   }
 
   ngOnInit(): void {
@@ -48,15 +54,16 @@ export class EventsComponent implements OnInit {
   addEvent(): void {
 
     const eventToAdd: Event = this.eventsService.constructEvent(
-      new Date(2019, 0, 25, 10, 30, 0, 0),
-      'Inauguration',
-      'Inauguration',
-      `Its finally here! the inaugration of the first official coding club of Ramaiah University!`,
+      new Date(2019, 1, 20, 17, 0, 0, 0),
+      'Introduction to Linux',
+      'Introduction to Linux',
+      `Cynergy is back with its most awaited workshops on Introduction to FLOSS and Linux CLI 101,
+      Learn what are the benefits of FLOSS, and the buzz around Linux, and why should you know about it`,
       '',
       ['Seminar Hall'],
       [''],
-      120,
-      'Inauguration'
+      90,
+      'Workshop'
     );
 
     this.eventsService.addEvent(eventToAdd)
@@ -110,6 +117,32 @@ export class EventsComponent implements OnInit {
     console.log('Past Two Events : ');
     this.eventsService.getPastTwoEvents()
       .then(console.log);
+  }
+
+  testCloudFunction(): void {
+    console.log('testing cloud function : ');
+    const addMessage = firebase.functions().httpsCallable('addAdmin');
+    addMessage()
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  testAuthentication(): void {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.authSerice.getCurrentUser(user.email)
+          .then(console.log)
+          .catch(console.log);
+      }
+    });
+  }
+
+  addAttendance(): void {
+    this.eventsService.updateUserEvent('satyajitghana8@gmail.com', 'E01');
   }
 
 }

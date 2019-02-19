@@ -15,15 +15,26 @@
           <p class="text-uppercase blue-text">
             <strong>Ninja</strong>
           </p>
-          <p class="blue-text">
-            Ranking:
+          <!-- <p class="blue-text">
+            Rating:
             <strong>1450</strong>
+          </p> -->
+          <p class="blue-text" style="font-weight: 800">
+            Points:
+            <strong >{{attendance * 5}}</strong>
           </p>
-          <p class="button red white-text">
+          <p class="grey-text">Your Tracks : </p>
+          <p class="blue-text" *ngIf="user.competitive_track && user.competitive_track == true" >
+            Competitive Track
+          </p>
+          <p class="blue-text" *ngIf="user.development_track && user.development_track == true" >
+            Development Track
+          </p>
+          <!-- <p class="button red white-text">
             <a class="nav-link" (click)="authService.signOut()">
               <i class="fas fa-sign-out-alt"></i>Log out
             </a>
-          </p>
+          </p> -->
           <p class="grey-text">Bio.</p>
 
           <p class="blue-text" *ngIf="user.facebook" >
@@ -64,8 +75,7 @@
             <div class="col-lg-6">
               <blockquote class="blockquote bq-primary">
                 <p class="bq-title">Attendance</p>
-                <p class="text-white">0 out of 4 sessions<br>
-                  0 out of 4 workshops
+                <p class="text-white">{{attendance}} out of {{total_events}} sessions
                 </p>
               </blockquote>
             </div>
@@ -106,15 +116,16 @@
 
             </div>
             <div class="col-lg-4 col-md-12 text-center my-2">
-              <mdb-card class="text-white" style="width: auto;" bgColor="bg-dark">
+              <mdb-card class="text-white mx-auto" style="width: auto;" bgColor="bg-white">
                 <mdb-card-body>
                   <mdb-card-title>
                     <h5 class="font-weight-bold mb-3">Event QR</h5>
                   </mdb-card-title>
-                  <mdb-card-text class="mb-0 pb-0">Your key to the event</mdb-card-text>
+                  <mdb-card-text class="mb-0 pb-0">Your key to the event <br>
+                    {{upcomingEvent.eventName}}</mdb-card-text>
                 </mdb-card-body>
                 <!-- <mdb-card-img src="../../assets/QR.png" class="img-fluid rounded mx-auto d-block" alt="QR Code"></mdb-card-img> -->
-                <qrcode [qrdata]="usernameQR" [size]="256" [level]="'M'"></qrcode>
+                <qrcode class="py-5" style="margin: auto; padding-bottom: 20px;" [qrdata]="eventQR" [size]="256" [level]="'M'"></qrcode>
               </mdb-card>
             </div>
             <div class="col-lg-4 col-md-12 text-center my-2">
