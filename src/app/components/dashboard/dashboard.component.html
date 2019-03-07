@@ -135,9 +135,10 @@
                     <h5 class="font-weight-bold mb-3">Leaderboard Stats</h5>
                   </mdb-card-title>
                   <mdb-card-text class="mb-0 pb-0">Your key to the success</mdb-card-text>
-                  <div class="flex-row">
-                    <a class="card-link">Mrow</a>
-                    <a class="card-link">Meow Meow</a>
+                  <div class="flex-row" *ngFor="let row of leaderboard">
+                    <!-- <a class="card-link">Leaderboard</a>
+                    <a class="card-link">Meow Meow</a> -->
+                    <a class="card-link">{{row.name}} {{row.points}} points</a>
                   </div>
                 </mdb-card-body>
 

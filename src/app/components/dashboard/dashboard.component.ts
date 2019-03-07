@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { EventsService } from 'src/app/services/events.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { LeaderboardService } from 'src/app/services/leaderboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,12 +18,14 @@ export class DashboardComponent implements OnInit {
   upcomingEvent: any;
   attendance: any;
   total_events: any;
+  leaderboard: any[];
 
   constructor(
     public authService: AuthService,
     private afAuth: AngularFireAuth,
     private eventService: EventsService,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private leaderboardService: LeaderboardService
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -56,6 +59,14 @@ export class DashboardComponent implements OnInit {
       })
       .catch(console.log);
     this.db.collection('EventsList').ref.get().then(snapshot => this.total_events = snapshot.size);
+
+    // Fetch the Leaderboard
+    leaderboardService.getLeaderboard()
+      .then(data => {
+        this.leaderboard = data;
+      })
+      .catch(console.log);
+
   }
 
   ngOnInit() {  }

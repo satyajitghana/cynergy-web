@@ -73,19 +73,23 @@ export class RegisterComponent implements OnInit {
     user.competitive_track = this.specificInfo.value.competitive_track;
     user.development_track = this.specificInfo.value.development_track;
     console.log(user);
-    this.authService.signUpWithEmailAndPassword(user.email, this.basicInfo.value.password);
-    this.authService.saveRegistrationInfo(user)
-    .then( () => {
-      this.alertService.success('Registered Successfully');
-      // Redirect after 2 seconds
-      setTimeout(() => {
-        this.router.navigate(['/dashboard']);
-      }, 2000);
-    }
-    )
-    .catch(err => {
-      this.alertService.error('Error : ' + err);
-    });
+    this.authService.signUpWithEmailAndPassword(user.email, this.basicInfo.value.password)
+      .then((result) => {
+        this.authService.saveRegistrationInfo(user)
+        .then( () => {
+          this.alertService.success('Registered Successfully');
+          // Redirect after 2 seconds
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 2000);
+        }
+        )
+        .catch(err => {
+          this.alertService.error('Error : ' + err);
+        });
+      })
+      .catch(console.log);
+
   }
 
 }
